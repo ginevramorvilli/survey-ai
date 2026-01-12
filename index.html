@@ -1,25 +1,275 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Survey</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini intervista (3–5 min)</title>
+  <meta name="description" content="Partecipa a una mini intervista sperimentale di 3–5 minuti." />
+
+  <style>
+    /* ====== 1) Variabili di stile (colori, raggi, ecc.) ====== */
+    :root{
+      --bg: #0b0f19;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.06);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.55);
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 18px;
+      --accent: rgba(99,102,241,.95);
+    }
+
+    /* ====== 2) Reset base ====== */
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      line-height: 1.4;
+
+      /* Sfondo "intrigante" con gradienti */
+      background:
+        radial-gradient(1100px 600px at 20% -10%, rgba(99,102,241,.35), transparent 60%),
+        radial-gradient(900px 600px at 100% 20%, rgba(16,185,129,.25), transparent 60%),
+        radial-gradient(900px 600px at 20% 110%, rgba(236,72,153,.18), transparent 60%),
+        var(--bg);
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    /* ====== 3) Header ====== */
+    header{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: .2px;
+    }
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(99,102,241,.15);
+    }
+    .pill{
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* ====== 4) Card / pannelli ====== */
+    .panel{
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 22px;
+      backdrop-filter: blur(10px);
+    }
+
+    /* ====== 5) Hero layout ====== */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    h1{
+      font-size: clamp(28px, 3.6vw, 44px);
+      margin: 0 0 10px;
+      letter-spacing: -0.6px;
+    }
+    .sub{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 60ch;
+    }
+
+    .bullets{
+      display:grid;
+      gap: 10px;
+      margin: 16px 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .bullets b{ color: var(--text); font-weight: 650; }
+
+    /* ====== 6) Bottoni ====== */
+    .ctaRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .btn{
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.10);
+      color: var(--text);
+      padding: 11px 14px;
+      border-radius: 14px;
+      font-weight: 650;
+      cursor:pointer;
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.14); }
+    .btn.primary{
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn.primary:hover{ filter: brightness(1.02); }
+
+    .note{
+      color: var(--muted2);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+
+    /* ====== 7) Box "come funziona" ====== */
+    .steps{ display:grid; gap: 12px; }
+    .step{
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(0,0,0,.12);
+    }
+    .step h3{ margin:0 0 6px; font-size: 14px; letter-spacing:.2px; }
+    .step p{ margin:0; color: var(--muted); font-size: 14px; }
+
+    /* ====== 8) Sezione widget ====== */
+    .section{ margin-top: 18px; }
+    .sectionTitle{ font-size: 16px; margin: 0 0 10px; letter-spacing: .2px; }
+    .widgetBox{
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: rgba(0,0,0,.18);
+      min-height: 320px;
+    }
+
+    /* ====== 9) Footer ====== */
+    footer{
+      margin-top: 22px;
+      color: var(--muted2);
+      font-size: 12px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
 </head>
 
-<body style="font-family: Arial, sans-serif; max-width: 700px; margin: 40px auto; padding: 20px;">
+<body>
+  <div class="wrap">
 
-  <h1>Partecipa alla survey</h1>
+    <!-- Header: brand + pill durata -->
+    <header>
+      <div class="brand"><span class="dot"></span> GPF · Test pilota</div>
+      <div class="pill">⏱ 3–5 min · 🎧 Audio attivo</div>
+    </header>
 
-  <p>
-    La survey dura circa 5 minuti.  
-    Puoi interromperla in qualsiasi momento.
-  </p>
+    <!-- Hero: testo a sinistra + box "come funziona" a destra -->
+    <div class="hero">
 
-  <p>
-    Clicca sul pulsante qui sotto per iniziare.
-  </p>
+      <section class="panel">
+        <h1>Mini intervista (3–5 minuti)</h1>
+        <p class="sub">
+          Stiamo sperimentando un nuovo modo di condurre ricerche con un agente automatizzato.
+          La tua partecipazione ci aiuta a migliorare il processo.
+        </p>
 
-  <elevenlabs-convai agent-id="agent_4801ke9ersdkfn085t8cfgggh18z"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+        <div class="bullets">
+          <div>✅ <b>Poche domande</b>, uguali per tutti</div>
+          <div>🔒 <b>Risposte in forma aggregata</b> (se applicabile)</div>
+          <div>🧭 Puoi <b>interrompere quando vuoi</b></div>
+        </div>
 
+        <div class="ctaRow">
+          <a class="btn primary" href="#intervista">Inizia ora →</a>
+          <a class="btn" href="#come-funziona">Come funziona</a>
+        </div>
+
+        <p class="note">
+          Suggerimento: se sei in un luogo rumoroso, usa le cuffie. Se il microfono è bloccato, abilitalo dal browser.
+        </p>
+      </section>
+
+      <aside class="panel" id="come-funziona">
+        <div class="sectionTitle">Come funziona</div>
+        <div class="steps">
+          <div class="step">
+            <h3>1) Avvia</h3>
+            <p>Clicca “Inizia ora” e apri il widget.</p>
+          </div>
+          <div class="step">
+            <h3>2) Rispondi</h3>
+            <p>Risposte semplici (sì/no o numeri). Nessuna preparazione.</p>
+          </div>
+          <div class="step">
+            <h3>3) Fine</h3>
+            <p>Ringraziamento e chiusura. Puoi interrompere in qualsiasi momento.</p>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Sezione dove incollare il widget -->
+    <section class="panel section" id="intervista">
+      <div class="sectionTitle">Avvia l’intervista</div>
+      <div class="widgetBox">
+       <elevenlabs-convai agent-id="agent_4801ke9ersdkfn085t8cfgggh18z"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+      </div>
+      <p class="note">Se non senti audio, verifica volume e autorizzazioni del browser. Se serve, ricarica la pagina.</p>
+    </section>
+
+    <footer>
+      <div>© GPF · Progetto sperimentale</div>
+      <div class="pill">Info & condizioni: partecipazione volontaria · interrompibile in ogni momento</div>
+    </footer>
+
+  </div>
+
+  <!-- JS: solo scroll morbido ai link interni -->
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if (!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior: 'smooth', block: 'start'});
+      });
+    });
+  </script>
 </body>
 </html>
