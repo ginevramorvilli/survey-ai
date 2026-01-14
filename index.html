@@ -185,16 +185,13 @@
       justify-content: space-between;
       align-items: center;
     }
-    elevenlabs-convai {
-  display: block;
-  position: relative !important;
-  z-index: 1;
-}
 
-.widgetBox {
-  overflow: hidden;
-  min-height: 420px;
-}
+    /* ===== ElevenLabs widget: safe sizing ===== */
+    elevenlabs-convai{
+      display: block;
+      width: 100%;
+      min-height: 420px;
+    }
   </style>
 </head>
 
@@ -213,10 +210,10 @@
       <section class="panel">
         <h1>Mini intervista (3–5 minuti)</h1>
         <p class="sub">
-        Stiamo sperimentando un nuovo modo di fare ricerca con un agente automatizzato.</p>
-<p>Il nostro obiettivo è raccogliere opinioni autentiche e comprensione profonda delle esperienze delle persone.</p>
-<p>La tua partecipazione ci aiuta a migliorare questo processo.
+          Stiamo sperimentando un nuovo modo di fare ricerca con un agente automatizzato.
         </p>
+        <p>Il nostro obiettivo è raccogliere opinioni autentiche e comprensione profonda delle esperienze delle persone.</p>
+        <p>La tua partecipazione ci aiuta a migliorare questo processo.</p>
 
         <div class="bullets">
           <div>✅ <b>Poche domande</b> </div>
@@ -242,15 +239,15 @@
             <p>Clicca l'icona del telefono per iniziare l'intervista.</p>
           </div>
           <div class="step">
-            <h3>2) Puoi scegliere come rispondere </h3>
+            <h3>2) Puoi scegliere come rispondere</h3>
             <p>Se preferisci, puoi usare la chat scritta invece della voce.
-Durante l’intervista puoi passare liberamente dalla voce al testo.</p>
+            Durante l’intervista puoi passare liberamente dalla voce al testo.</p>
           </div>
           <div class="step">
             <h3>3) Lingua/Language</h3>
             <p>You can switch to English using the language selector.</p>
           </div>
-             <div class="step">
+          <div class="step">
             <h3>4) Una sola partecipazione</h3>
             <p>Questa intervista è progettata per una sola compilazione per persona.</p>
           </div>
@@ -259,24 +256,22 @@ Durante l’intervista puoi passare liberamente dalla voce al testo.</p>
 
     </div>
 
-   <!-- Sezione dove incollare il widget -->
-<section class="panel section" id="intervista">
-  <div class="sectionTitle">Avvia l’intervista</div>
+    <!-- Sezione dove incollare il widget -->
+    <section class="panel section" id="intervista">
+      <div class="sectionTitle">Avvia l’intervista</div>
 
-  <p class="note" style="margin: 0 0 12px 0;">
-    Quando sei pronto/a, clicca sull’icona del telefono per iniziare.
-  </p>
+      <p class="note" style="margin: 0 0 12px 0;">
+        Quando sei pronto/a, clicca sull’icona del telefono per iniziare.
+      </p>
 
-  <div class="widgetBox">
-   <elevenlabs-convai agent-id="agent_4801ke9ersdkfn085t8cfgggh18z"></elevenlabs-convai>
-  </div>
+      <div class="widgetBox">
+        <elevenlabs-convai agent-id="agent_4801ke9ersdkfn085t8cfgggh18z"></elevenlabs-convai>
+      </div>
 
-
-  <p class="note" style="margin-top: 12px;">
-    Se non senti audio, verifica volume e autorizzazioni del browser. Se serve, ricarica la pagina.
-  </p>
-</section>
-
+      <p class="note" style="margin-top: 12px;">
+        Se non senti audio, verifica volume e autorizzazioni del browser. Se serve, ricarica la pagina.
+      </p>
+    </section>
 
     <footer>
       <div>© GPF · Progetto sperimentale</div>
@@ -284,10 +279,9 @@ Durante l’intervista puoi passare liberamente dalla voce al testo.</p>
     </footer>
 
   </div>
-  
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed"
-        type="text/javascript"></script>
-  
+
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
+
   <!-- JS: solo scroll morbido ai link interni -->
   <script>
     document.querySelectorAll('a[href^="#"]').forEach(a => {
