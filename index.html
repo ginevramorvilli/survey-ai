@@ -185,6 +185,16 @@
       justify-content: space-between;
       align-items: center;
     }
+    elevenlabs-convai {
+  display: block;
+  position: relative !important;
+  z-index: 1;
+}
+
+.widgetBox {
+  overflow: hidden;
+  min-height: 420px;
+}
   </style>
 </head>
 
@@ -254,7 +264,7 @@ Durante l’intervista puoi passare liberamente dalla voce al testo.</p>
   </p>
 
   <div class="widgetBox">
-   <elevenlabs-convai agent-id="agent_4801ke9ersdkfn085t8cfgggh18z"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+   <elevenlabs-convai agent-id="agent_4801ke9ersdkfn085t8cfgggh18z"></elevenlabs-convai>
   </div>
 
 
@@ -283,5 +293,8 @@ Durante l’intervista puoi passare liberamente dalla voce al testo.</p>
       });
     });
   </script>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed"
+        async
+        type="text/javascript"></script>
 </body>
 </html>
